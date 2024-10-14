@@ -6,15 +6,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const thumbnails = document.querySelector('#thumbs');
 
   function changeImage(e) {
-    const clickedImage = e.target.tagName === 'IMG' ? e.target : null;
-    const necessaryLink = clickedImage ? clickedImage.closest('a') : null;
+    const necessaryLink = e.target.closest('a');
 
-    if (clickedImage && necessaryLink) {
+    if (necessaryLink) {
       e.preventDefault();
 
-      const newSrc = necessaryLink.getAttribute('href');
+      const clickedImage = necessaryLink.querySelector('img');
 
-      mainImage.setAttribute('src', newSrc);
+      if (clickedImage) {
+        const newSrc = necessaryLink.getAttribute('href');
+
+        mainImage.setAttribute('src', newSrc);
+      }
     }
   }
   thumbnails.addEventListener('click', changeImage);
