@@ -6,10 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const thumbnails = document.querySelector('#thumbs');
 
   function changeImage(e) {
-    if (e.target.tagName === 'IMG' || e.target.tagName === 'A') {
+    const clickedImage = e.target.tagName === 'IMG' ? e.target : null;
+    const necessaryLink = clickedImage ? clickedImage.closest('a') : null;
+
+    if (clickedImage && necessaryLink) {
       e.preventDefault();
 
-      const necessaryLink = e.target.closest('a');
       const newSrc = necessaryLink.getAttribute('href');
 
       mainImage.setAttribute('src', newSrc);
